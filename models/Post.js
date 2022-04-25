@@ -19,7 +19,7 @@ const PostSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    catrgories: {
+    categories: {
       type: Array,
       required: false,
     },
@@ -27,4 +27,4 @@ const PostSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("User", PostSchema);
+module.exports = mongoose.model("Post", PostSchema);
