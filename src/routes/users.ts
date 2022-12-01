@@ -1,8 +1,8 @@
-const router = require("express").Router();
-const User = require("../models/User");
-const Post = require("../models/Post");
-const bcrypt = require("bcrypt");
-
+import express from "express";
+import bcrypt from "bcrypt";
+import Post from "../models/Post";
+import User from "../models/User";
+const router = express.Router();
 //UPDATE
 router.put("/:id", async (req, res) => {
   if (req.body.userId === req.params.id) {
@@ -58,4 +58,4 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

@@ -1,26 +1,26 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const mongoose = require("mongoose");
-const multer = require("multer");
+import express, { Request } from "express";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import multer from "multer";
+import authRoute from "./src/routes/auth";
+import userRoute from "./src/routes/users";
+import postRoute from "./src/routes/post";
+import categoryRoute from "./src/routes/category";
 const app = express();
-const authRoute = require("./routes/auth");
-const userRoute = require("./routes/users");
-const postRoute = require("./routes/post");
-const categoryRoute = require("./routes/category");
 
 dotenv.config();
 app.use(express.json());
 
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(process.env.MONGO_URI!)
   .then(() => console.log("Connected to mongodb"))
   .catch((err) => console.log("Could not connect to mongodb"));
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
+  destination: (req: Request, file: any, cb: Function) => {
     cb(null, "images");
   },
-  filename: (req, file, cb) => {
+  filename: (req: Request, file: any, cb: Function) => {
     cb(null, req.body.name);
   },
 });

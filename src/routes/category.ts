@@ -1,9 +1,10 @@
-const router = require("express").Router();
-const Category = require("../models/Category");
+import express, { Request, Response } from "express";
+import Category from "../models/Category";
+const router = express.Router();
 
 // Create Category
 
-router.post("/", async (req, res) => {
+router.post("/", async (req: Request, res: Response) => {
   const newCat = new Category(req.body);
   try {
     const savedCat = await newCat.save();
@@ -15,7 +16,7 @@ router.post("/", async (req, res) => {
 
 // get
 
-router.get("/", async (req, res) => {
+router.get("/", async (req: Request, res: Response) => {
   try {
     const cats = await Category.find();
     res.status(200).send(cats);
@@ -24,4 +25,4 @@ router.get("/", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

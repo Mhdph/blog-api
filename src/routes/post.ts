@@ -1,9 +1,10 @@
-const router = require("express").Router();
-const User = require("../models/User");
-const Post = require("../models/Post");
+import Post from "../models/Post";
+import express, { Request, Response } from "express";
+
+const router = express.Router();
 
 //Create New Post
-router.post("/:id", async (req, res) => {
+router.post("/:id", async (req: Request, res: Response) => {
   const newPost = new Post(req.body);
   try {
     const savedPost = await newPost.save();
@@ -15,7 +16,7 @@ router.post("/:id", async (req, res) => {
 
 // Update Post
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", async (req: Request, res: Response) => {
   try {
     const post = await Post.findById(req.params.id);
     if (post.username === req.body.username) {
@@ -41,7 +42,7 @@ router.put("/:id", async (req, res) => {
 
 //delete
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", async (req: Request, res: Response) => {
   try {
     const post = await Post.findById(req.params.id);
     if (post.username === req.body.username) {
@@ -61,7 +62,7 @@ router.delete("/:id", async (req, res) => {
 
 //Get Post
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req: Request, res: Response) => {
   try {
     const post = await Post.findById(req.params.id);
     res.status(200).json(post);
@@ -72,7 +73,7 @@ router.get("/:id", async (req, res) => {
 
 //Get ALL Post
 
-router.get("/", async (req, res) => {
+router.get("/", async (req: Request, res: Response) => {
   const username = req.query.user;
   const catName = req.query.cat;
 
@@ -95,4 +96,4 @@ router.get("/", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
